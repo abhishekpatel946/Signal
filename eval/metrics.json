@@ -1,0 +1,13 @@
+{
+  "n_accounts": 7777,
+  "precision_at_50": 0.78,
+  "precision_at_100": 0.83,
+  "noise_leak_top100": 0.0,
+  "high_sev_top100": 1.0,
+  "high_sev_random100": 1.0,
+  "call_rate_top50": 0.78,
+  "call_rate_all_exported": 0.084,
+  "gold_n": 100,
+  "gold_auto_agreement": 0.82,
+  "gold_call_in_top100": 14
+}

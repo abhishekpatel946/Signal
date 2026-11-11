@@ -1,0 +1,30 @@
+# Raw scan dump (9–17 GB) — never commit
+b2_download_file_by_id
+Unconfirmed*.crdownload
+_sample_head.bin
+*.zst
+*.zstd
+
+# Pipeline artifacts (regenerate locally)
+data/raw/
+data/parquet/
+data/parquet_test/
+data/tmp/
+__pycache__/
+*.pyc
+.venv/
+venv/
+eval/peek.py
+eval/list_gold.py
+.env
+.DS_Store
+
+# Next.js
+app/node_modules/
+app/.next/
+app/out/
+app/.vercel/
+
+# IDE
+.idea/
+.vscode/

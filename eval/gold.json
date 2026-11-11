@@ -1,0 +1,2002 @@
+[
+  {
+    "domain": "ipn.mx",
+    "score": 83,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 4 listed); High exploit probability (EPSS 1.00); End-of-life software on 1 service(s); Dangerous service(s) exposed: printer; IoT/camera gear reachable from the public internet; Self-signed TLS on a public service",
+    "country": "MX",
+    "org_observed": "Instituto Politecnico Nacional",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": true,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "scu.edu.tw",
+    "score": 65,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 4 listed); High exploit probability (EPSS 1.00); End-of-life software on 1 service(s); Dangerous service(s) exposed: netbios, sql server; HTTP services with no WAF in front of known risk",
+    "country": "TW",
+    "org_observed": "SooChow University",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "digicom-al.net",
+    "score": 64,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 4 listed); High exploit probability (EPSS 0.71); End-of-life software on 1 service(s); Dangerous service(s) exposed: isakmp; HTTP services with no WAF in front of known risk",
+    "country": "AL",
+    "org_observed": "/30 Business Customers",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "alfenas.mg.gov.br",
+    "score": 62,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 1 listed); High exploit probability (EPSS 0.74); Unpatched software on 3 distinct services; Dangerous service(s) exposed: ubiquiti; Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "BR",
+    "org_observed": "Prefeitura Municipal de Alfenas",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "ikexpress.com",
+    "score": 59,
+    "why": "High CVE on a public service (CVSS 7.7, 3 listed); High exploit probability (EPSS 1.00); End-of-life software on 2 service(s); Dangerous service(s) exposed: port-135; HTTP services with no WAF in front of known risk",
+    "country": "FR",
+    "org_observed": "ikoula france serveur dedie",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "keyubu.com",
+    "score": 58,
+    "why": "High CVE on a public service (CVSS 7.7, 3 listed); High exploit probability (EPSS 1.00); End-of-life software on 1 service(s); Dangerous service(s) exposed: port-135; HTTP services with no WAF in front of known risk",
+    "country": "TR",
+    "org_observed": "Private Customer",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "yili.com",
+    "score": 58,
+    "why": "High CVE on a public service (CVSS 7.7, 3 listed); High exploit probability (EPSS 1.00); End-of-life software on 1 service(s); Dangerous service(s) exposed: port-9000; HTTP services with no WAF in front of known risk",
+    "country": "CN",
+    "org_observed": "CHINANET NeiMengGu province network",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "de-novo.biz",
+    "score": 58,
+    "why": "High CVE on a public service (CVSS 7.5, 1 listed); High exploit probability (EPSS 1.00); End-of-life software on 1 service(s); Dangerous service(s) exposed: tomcat; HTTP services with no WAF in front of known risk",
+    "country": "UA",
+    "org_observed": "Limited Liability Company \"De Novo\"",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "tilaa.cloud",
+    "score": 58,
+    "why": "High CVE on a public service (CVSS 7.5, 1 listed); High exploit probability (EPSS 1.00); End-of-life software on 1 service(s); Dangerous service(s) exposed: port-135; HTTP services with no WAF in front of known risk",
+    "country": "NL",
+    "org_observed": "Tilaa",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "ukservers.com",
+    "score": 57,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 4 listed); High exploit probability (EPSS 0.88); Dangerous service(s) exposed: port-135; Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "GB",
+    "org_observed": "WUD001",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "bnet.at",
+    "score": 57,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 1 listed); High exploit probability (EPSS 0.74); Dangerous service(s) exposed: port-8081; Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "AT",
+    "org_observed": "kabelplus GmbH",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "brouzdal.cz",
+    "score": 57,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 1 listed); High exploit probability (EPSS 0.74); Dangerous service(s) exposed: ubiquiti; Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "CZ",
+    "org_observed": "Brouzdal s.r.o.",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "cin.net",
+    "score": 57,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 1 listed); High exploit probability (EPSS 0.74); Dangerous service(s) exposed: ubiquiti; Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "Computerese",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "evopc.pl",
+    "score": 57,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 1 listed); High exploit probability (EPSS 0.74); Dangerous service(s) exposed: ubiquiti; Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "PL",
+    "org_observed": "TELNET Ropczyce Sp. z o.o.",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "hersheytel.net",
+    "score": 57,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 1 listed); High exploit probability (EPSS 0.74); Dangerous service(s) exposed: ubiquiti; Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "HERSHEY COOPERATIVE TELEPHONE CO",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "highspeedlink.net",
+    "score": 57,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 1 listed); High exploit probability (EPSS 0.74); Dangerous service(s) exposed: telnet; Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "Rural Broadband Network Services LLC",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "provalue.net",
+    "score": 57,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 1 listed); High exploit probability (EPSS 0.74); Dangerous service(s) exposed: ubiquiti; Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "KAMO Electric Cooperative, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "yrless.net.nz",
+    "score": 57,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 1 listed); High exploit probability (EPSS 0.74); Dangerous service(s) exposed: ubiquiti; Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "NZ",
+    "org_observed": "Yrless Ltd",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "cableonda.net",
+    "score": 57,
+    "why": "High CVE on a public service (CVSS 8.8, 4 listed); High exploit probability (EPSS 0.60); Dangerous service(s) exposed: port-139, dahua_dvr_web; IoT/camera gear reachable from the public internet; HTTP services with no WAF in front of known risk",
+    "country": "PA",
+    "org_observed": "Cable Onda",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": true,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "brasiltelecom.net.br",
+    "score": 57,
+    "why": "High exploit probability (EPSS 1.00); Dangerous service(s) exposed: dahua_dvr_web; IoT/camera gear reachable from the public internet; Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "BR",
+    "org_observed": "V tal",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": true,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "viviotech.net",
+    "score": 56,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 11 listed); High exploit probability (EPSS 1.00); Unpatched software on 9 distinct services; End-of-life software on 1 service(s); Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "Vivio Technologies",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "advance.com.ar",
+    "score": 56,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 5 listed); High exploit probability (EPSS 0.82); End-of-life software on 1 service(s); Dangerous service(s) exposed: telnet; HTTP services with no WAF in front of known risk",
+    "country": "AR",
+    "org_observed": "Telefonica de Argentina",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "bihar.gov.in",
+    "score": 56,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 8 listed); High exploit probability (EPSS 1.00); Unpatched software on 9 distinct services; End-of-life software on 5 service(s); Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "IN",
+    "org_observed": "RailTel Corporation is an Internet Service Provider.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "kylos.pl",
+    "score": 56,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 6 listed); High exploit probability (EPSS 1.00); Unpatched software on 3 distinct services; End-of-life software on 4 service(s); Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "PL",
+    "org_observed": "Kylos sp. z o.o.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "uniandes.edu.co",
+    "score": 56,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 11 listed); High exploit probability (EPSS 1.00); Unpatched software on 5 distinct services; End-of-life software on 3 service(s); Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "CO",
+    "org_observed": "University de Los Andes",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "unina.it",
+    "score": 56,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 8 listed); High exploit probability (EPSS 1.00); Unpatched software on 7 distinct services; End-of-life software on 2 service(s); Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "IT",
+    "org_observed": "Universita' degli Studi di Napoli Federico II",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "uvtnet.cz",
+    "score": 56,
+    "why": "End-of-life software on 1 service(s); Dangerous service(s) exposed: hikvision; IoT/camera gear reachable from the public internet; HTTP services with no WAF in front of known risk",
+    "country": "CZ",
+    "org_observed": "UVT Internet s.r.o.",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": true,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "t-online.hu",
+    "score": 55,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 4 listed); Elevated exploit probability (EPSS 0.33); Unpatched software on 5 distinct services; Dangerous service(s) exposed: port-500, telnet, isakmp; HTTP services with no WAF in front of known risk",
+    "country": "HU",
+    "org_observed": "Magyar Telekom leased line customers",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "tpnet.pl",
+    "score": 55,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 3 listed); Elevated exploit probability (EPSS 0.33); Dangerous service(s) exposed: pptp, l2tp, tomcat; Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "PL",
+    "org_observed": "Orange Polska Spolka Akcyjna",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "hostmonster.com",
+    "score": 55,
+    "why": "High CVE on a public service (CVSS 7.5, 4 listed); Elevated exploit probability (EPSS 0.25); End-of-life software on 1 service(s); Dangerous service(s) exposed: postgres, ftp; HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "Unified Layer",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "cloud-ips.com",
+    "score": 54,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 4 listed); High exploit probability (EPSS 0.71); End-of-life software on 1 service(s); Dangerous service(s) exposed: port-135; HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "Rackspace Hosting",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "plottechnologygroup.com",
+    "score": 54,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 4 listed); High exploit probability (EPSS 1.00); End-of-life software on 1 service(s); Dangerous service(s) exposed: mysqlx; HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "Comcast Cable Communications, LLC",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "ltl.icu",
+    "score": 54,
+    "why": "Critical internet-facing CVE (CVSS 9.4, 2 listed); High exploit probability (EPSS 1.00); End-of-life software on 1 service(s); Dangerous service(s) exposed: portainer; HTTP services with no WAF in front of known risk",
+    "country": "GB",
+    "org_observed": "ahcloud AH CLOUD LTD",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "rcn.com",
+    "score": 54,
+    "why": "High CVE on a public service (CVSS 8.7, 4 listed); High exploit probability (EPSS 1.00); Dangerous service(s) exposed: isakmp; Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "RCN",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "forpsi.net",
+    "score": 54,
+    "why": "High CVE on a public service (CVSS 8.6, 5 listed); High exploit probability (EPSS 1.00); Unpatched software on 3 distinct services; End-of-life software on 1 service(s); Dangerous service(s) exposed: pptp, dns; HTTP services with no WAF in front of known risk",
+    "country": "CZ",
+    "org_observed": "Cloud Services CZ1",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "zap.cloud",
+    "score": 54,
+    "why": "High CVE on a public service (CVSS 7.5, 2 listed); High exploit probability (EPSS 1.00); Unpatched software on 4 distinct services; End-of-life software on 3 service(s); Dangerous service(s) exposed: port-135; HTTP services with no WAF in front of known risk",
+    "country": "DE",
+    "org_observed": "ZAP-Hosting GmbH",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "free.fr",
+    "score": 53,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 4 listed); Elevated exploit probability (EPSS 0.33); Dangerous service(s) exposed: port-500; HTTP services with no WAF in front of known risk",
+    "country": "FR",
+    "org_observed": "Free SAS",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "skip",
+    "note": "hand: provider / telco / hoster \u2014 not this ICP"
+  },
+  {
+    "domain": "nccu.edu.tw",
+    "score": 53,
+    "why": "High CVE on a public service (CVSS 8.1, 4 listed); High exploit probability (EPSS 0.96); Dangerous service(s) exposed: netbios; Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "TW",
+    "org_observed": "National Chengchi University",
+    "signals": {
+      "cve": true,
+      "exposure": true,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "kfa-juelich.de",
+    "score": 52,
+    "why": "Critical internet-facing CVE (CVSS 9.9, 1 listed); High exploit probability (EPSS 1.00); End-of-life software on 1 service(s); Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "DE",
+    "org_observed": "Forschungszentrum Juelich GmbH",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "asklawyers.com",
+    "score": 52,
+    "why": "Critical internet-facing CVE (CVSS 9.8, 4 listed); High exploit probability (EPSS 1.00); End-of-life software on 1 service(s); Self-signed TLS on a public service; HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "Smart Servers",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": true,
+      "no_waf": true,
+      "self_signed": true,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "fokist.jp",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.95); HTTP services with no WAF in front of known risk",
+    "country": "JP",
+    "org_observed": "Sony Network Communications Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "generalsunshine.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 4 listed); High exploit probability (EPSS 0.88); HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "B2 Net Solutions Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "grounddteso.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 4 listed); High exploit probability (EPSS 0.88); HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "B2 Net Solutions Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "hiperconterminais.com.br",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.95); HTTP services with no WAF in front of known risk",
+    "country": "BR",
+    "org_observed": "TELEF\u00d4NICA BRASIL S.A",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "homeinfoinc.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 4 listed); High exploit probability (EPSS 0.88); HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "B2 Net Solutions Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "iglou.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.65); HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "IgLou Internet Services",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "imprensaoficial.com.br",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.95); HTTP services with no WAF in front of known risk",
+    "country": "BR",
+    "org_observed": "Cia Proc. de Dados do Estado de S Paulo - Prodesp",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "incide.it",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.95); HTTP services with no WAF in front of known risk",
+    "country": "IT",
+    "org_observed": "Redder Telco s.r.l.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "joompya.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 4 listed); High exploit probability (EPSS 0.88); HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "B2 Net Solutions Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "kdvik-rijeka.hr",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.99); HTTP services with no WAF in front of known risk",
+    "country": "HR",
+    "org_observed": "Hrvatski Telekom d.d.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "koneo.net",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.95); HTTP services with no WAF in front of known risk",
+    "country": "SE",
+    "org_observed": "INFRA-PA",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "lhs-sample-www6.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 3 listed); High exploit probability (EPSS 0.98); HTTP services with no WAF in front of known risk",
+    "country": "JP",
+    "org_observed": "Kai Creates Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "longcredit.net",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.95); HTTP services with no WAF in front of known risk",
+    "country": "CN",
+    "org_observed": "Beijing Topnew Info&Tech co., LTD.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "mealdealerion.net",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 4 listed); High exploit probability (EPSS 0.88); HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "Private Customer",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "moc1solutions.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.95); HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "Iland Internet Solutions Corporation",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "notehoping.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 4 listed); High exploit probability (EPSS 0.88); HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "B2 Net Solutions Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "pageflex.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.95); HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "FirstLight Networks, LLC",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "pge.rj.gov.br",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.95); HTTP services with no WAF in front of known risk",
+    "country": "BR",
+    "org_observed": "PRODERJ - Centro de Tecnologia da Informa\u00e7\u00e3o do RJ",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "popularhandmade.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 4 listed); High exploit probability (EPSS 0.88); HTTP services with no WAF in front of known risk",
+    "country": "CA",
+    "org_observed": "B2 Net Solutions Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "sangpria.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 4 listed); High exploit probability (EPSS 0.88); HTTP services with no WAF in front of known risk",
+    "country": "CA",
+    "org_observed": "B2 Net Solutions Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "sebastiantechnologies.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.99); HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "Intermedia.net, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "servicecentrale.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.95); HTTP services with no WAF in front of known risk",
+    "country": "NL",
+    "org_observed": "KPN B.V.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "shield-mill.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 4 listed); High exploit probability (EPSS 0.88); HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "B2 Net Solutions Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "siag.it",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.95); HTTP services with no WAF in front of known risk",
+    "country": "IT",
+    "org_observed": "Informatica Alto Adige Spa",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "themailersend.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 4 listed); High exploit probability (EPSS 0.88); HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "B2 Net Solutions Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "timeshipping.com.cn",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.95); HTTP services with no WAF in front of known risk",
+    "country": "CN",
+    "org_observed": "CHINA COSCO SHIPPING CORPORATION LIMITED",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "venta-portal.de",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.95); HTTP services with no WAF in front of known risk",
+    "country": "DE",
+    "org_observed": "MarcanT AG",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "wholesaleresorts.com",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 2 listed); High exploit probability (EPSS 0.95); HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "Brinkster Communications Corporation",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "winwill.in",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 10.0, 4 listed); High exploit probability (EPSS 0.88); HTTP services with no WAF in front of known risk",
+    "country": "US",
+    "org_observed": "B2 Net Solutions Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "mathfriend.app",
+    "score": 31,
+    "why": "Critical internet-facing CVE (CVSS 9.9, 1 listed); High exploit probability (EPSS 0.75); HTTP services with no WAF in front of known risk",
+    "country": "TH",
+    "org_observed": "ADVANCED WIRELESS NETWORK COMPANY LIMITED",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "petland.com",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "premium.sv",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "qdbentai.com",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "randolphgrp.com",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "responsesource.com",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "rims.org",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Amazon Technologies Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "roofingamersham.co.uk",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "samitivejthonburi.com",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "sandestin.com",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "spnursery.com",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "spplus.com",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "startsat60.com",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "stmarys.nsw.edu.au",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Amazon.com, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "tampabaypilots.com",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "tekwind.co.jp",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Amazon Technologies Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "thecheeseshed.com",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "thepollenstudio.com",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "thermprocesses.com",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "trianglefile.com",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "uematsu.co.jp",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "wavendonprecision.co.uk",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "webeden.co.uk",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "ashghal.gov.qa",
+    "score": 12,
+    "why": "High exploit probability (EPSS 0.99)",
+    "country": "QA",
+    "org_observed": "Vodafone Qatar Q.S.C.",
+    "signals": {
+      "cve": true,
+      "exposure": false,
+      "eol": false,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "call",
+    "label": "call",
+    "note": "hand: named institution or business with a real footprint"
+  },
+  {
+    "domain": "dlink.com",
+    "score": 12,
+    "why": "End-of-life software on 1 service(s)",
+    "country": "US",
+    "org_observed": "Amazon Technologies Inc.",
+    "signals": {
+      "cve": false,
+      "exposure": false,
+      "eol": true,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "headsupfortails.com",
+    "score": 12,
+    "why": "End-of-life software on 1 service(s)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": false,
+      "exposure": false,
+      "eol": true,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "irdeto.com",
+    "score": 12,
+    "why": "End-of-life software on 1 service(s)",
+    "country": "CA",
+    "org_observed": "Amazon.com, Inc.",
+    "signals": {
+      "cve": false,
+      "exposure": false,
+      "eol": true,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "lixil.co.jp",
+    "score": 12,
+    "why": "End-of-life software on 1 service(s)",
+    "country": "US",
+    "org_observed": "Google LLC",
+    "signals": {
+      "cve": false,
+      "exposure": false,
+      "eol": true,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "praxisga.com",
+    "score": 12,
+    "why": "End-of-life software on 1 service(s)",
+    "country": "US",
+    "org_observed": "Amazon Technologies Inc.",
+    "signals": {
+      "cve": false,
+      "exposure": false,
+      "eol": true,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "reddy.io",
+    "score": 12,
+    "why": "End-of-life software on 1 service(s)",
+    "country": "US",
+    "org_observed": "Cloudflare, Inc.",
+    "signals": {
+      "cve": false,
+      "exposure": false,
+      "eol": true,
+      "no_waf": false,
+      "self_signed": false,
+      "iot": false,
+      "waf_present": true,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  },
+  {
+    "domain": "thephone.coop",
+    "score": 12,
+    "why": "IoT/camera gear reachable from the public internet",
+    "country": "GB",
+    "org_observed": "Arisk Communications Inc.",
+    "signals": {
+      "cve": false,
+      "exposure": false,
+      "eol": false,
+      "no_waf": true,
+      "self_signed": false,
+      "iot": true,
+      "waf_present": false,
+      "reachable": false
+    },
+    "suggested": "skip",
+    "label": "skip",
+    "note": "skip: provider/noise/low urgency"
+  }
+]
