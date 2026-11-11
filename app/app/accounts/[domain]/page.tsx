@@ -8,9 +8,7 @@ function scoreClass(score: number) {
 }
 
 export function generateStaticParams() {
-  return loadAccounts()
-    .slice(0, 400)
-    .map((a) => ({ domain: a.domain }));
+  return loadAccounts().map((a) => ({ domain: a.domain }));
 }
 
 export default function AccountPage({ params }: { params: { domain: string } }) {
