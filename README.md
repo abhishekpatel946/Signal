@@ -2,9 +2,11 @@
 
 Take-home prototype for a **cybersecurity software** sales team: given a raw internet-wide scan, which **named companies** look like they need help *this week*, and why.
 
-Live app: see the Vercel URL in the submission note (deployed from `app/`).
+**Live app:** _(add your Vercel production URL after deploy — root directory `app/`)_
 
-This is not a CRM dump and not an email writer. The source file is a **Zstandard JSONL Shodan-style banner feed** (~16.9 GB). Each line is an IP/port/service. The sales unit is a **company**. The work is entity resolution + explainable risk signals.
+This is not a CRM dump and not an email writer. The source file is a **Zstandard JSONL Shodan-style banner feed** (~16.9 GB uncompressed stream). Each line is an IP/port/service. The sales unit is a **company**. The work is entity resolution + explainable risk signals.
+
+Deeper design: **[ARCHITECTURE.md](./ARCHITECTURE.md)** (data flow, modules, scoring, what to commit).
 
 ## How a rep uses it
 
@@ -21,14 +23,14 @@ zstd JSONL scan
   → resolve registrable domain (not the hosting org)
   → drop CDN / honeypot / ISP PTR / provider aggregates
   → rule-based 0–100 score + evidence
-  → app/data/accounts.json → Next.js on Vercel
+  → app/data/accounts.json → Next.js static export on Vercel
 ```
 
-**Ingest** (`python -m ingest.run`) never loads the 17 GB file into RAM. Production volume is “hundreds of files like this per month”: same job, new `--batch-id`.
+**Ingest** (`python -m ingest.run`) never loads the full dump into RAM. Production volume is “hundreds of files like this per month”: same job, new `--batch-id` (see ARCHITECTURE).
 
 **Entity resolution** is the actual problem. Shodan’s `org` field is usually the ISP (`OVH SAS`, `Google LLC`). We take hostnames, `tldextract` a registrable domain, and throw away reverse-DNS, cloud PTR, and telco umbrellas. No name → not in the queue.
 
-**Signals (no LLM)**
+**Signals (no LLM in the product)**
 
 | Signal | Why it matters to a cybersecurity seller |
 | --- | --- |
@@ -43,7 +45,7 @@ Score = capped urgency points × fit multiplier (0–100), with a stored reason 
 
 ## This batch (numbers)
 
-From **800,000** scan records (~12 min to ingest at ~1,100 records/s). Full-file ingest is the same command without `--max-records`.
+From **800,000** scan records (~12 min to ingest at ~1,100 records/s). **Full-file ingest** uses the same commands without `--max-records`; only runtime and Parquet size change.
 
 | Step | Count |
 | --- | --- |
@@ -72,10 +74,21 @@ Last run (`eval/metrics.json`):
 - **Call rate on all 7,777 exported accounts:** 0.084 — the ranker concentrates “call” accounts ~9× vs the exported set.
 - **Noise leak in top 100:** 0 (no leftover CDN/cloud PTR suffixes).
 - **High-severity finding:** 100% of the exported set, including a random 100. That is by design: we drop low-score rows before export. Ranking quality is *who to call*, not *whether a CVE exists*.
-- **Gold sample:** 100 stratified rows (top / mid / tail) in `eval/gold.json`, hand-labeled. Agreement with `auto_label`: **0.82**. 14 of the hand `call` labels sit in the scored top 100.
+- **Gold sample:** 100 stratified rows (top / mid / tail) in `eval/gold.json`, hand-labeled via `eval/hand_label.py`. Agreement with `auto_label`: **0.82**. Only **14** hand-`call` domains appear in the global top 100 because the gold set deliberately samples mid/tail ranks — not because the ranker misses obvious calls.
 - **Stability:** re-run `python -m ingest.score` on the same Parquet → same domain, score, and evidence class.
 
-We did **not** use an LLM, so there is no token cost to report.
+We did **not** use an LLM in scoring (deterministic rules, no token cost). Evaluation is rule-based + hand-reviewed gold.
+
+## How we built it (AI-assisted workflow)
+
+Firmable cares about *how* you work, not only the artifact:
+
+- **Data exploration:** streaming peek scripts and banner schema inspection (then removed from git as local tooling).
+- **Iteration on entity resolution:** denylists and PTR heuristics in `ingest/resolve.py` refined against false positives (telco umbrellas, CDN-only domains).
+- **Weights and export thresholds:** tuned against `eval/metrics.py` and the gold sample, not gut feel alone.
+- **IDE agents (Cursor):** used for boilerplate, refactors, and doc alignment — not for runtime scoring or labels.
+
+Product logic stays auditable Python; agents accelerated the dev loop.
 
 ## Run it locally
 
@@ -98,7 +111,27 @@ npm install
 npm run dev
 ```
 
-The 17 GB scan file is gitignored. Do not commit it. `app/data/accounts.json` is the only data the hosted app needs.
+Deploy (static export):
+
+```bash
+cd app
+npm run build
+npx vercel --prod
+```
+
+Set Vercel **Root Directory** to `app` when importing from GitHub.
+
+## Repository layout & git hygiene
+
+`.gitignore` keeps pushes limited to **working source + scored queue**:
+
+| In git | Ignored (regenerate locally) |
+| --- | --- |
+| `ingest/`, `eval/`, `requirements.txt` | Raw scan file, `*.zst`, `*.parquet` |
+| `app/` source + `app/data/accounts.json` | `app/node_modules/`, `.next/`, `out/`, `.vercel/` |
+| `data/score_stats.json`, `eval/gold.json`, `eval/metrics.json` | `data/parquet/`, `.venv/`, `assets/`, secrets |
+
+Do not commit the multi-GB scan. `app/data/accounts.json` is the precomputed payload the hosted app needs (~9 MB).
 
 ## Decisions we would defend in interview
 
@@ -113,4 +146,5 @@ The 17 GB scan file is gitignored. Do not commit it. `app/data/accounts.json` is
 - `ingest/` — stream, extract, resolve, score, export
 - `app/` — Next.js App Router (queue, account, method)
 - `eval/` — gold sample + metrics
-- `data/parquet/` — local host chunks (gitignored)
+- `ARCHITECTURE.md` — system design and commit policy
+- `SUBMISSION.md` — deploy/push checklist (optional)

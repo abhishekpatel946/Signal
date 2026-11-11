@@ -1,6 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+const PAGE_SIZE = 50;
 
 type Row = {
   domain: string;
@@ -42,8 +44,10 @@ function scoreClass(score: number) {
 export default function Queue({ accounts }: { accounts: Row[] }) {
   const [q, setQ] = useState("");
   const [country, setCountry] = useState("all");
+  const [decision, setDecision] = useState<"all" | Row["decision"]>("all");
   const [minScore, setMinScore] = useState(12);
   const [signals, setSignals] = useState<string[]>([]);
+  const [page, setPage] = useState(1);
 
   const countries = useMemo(() => {
     const set = new Set<string>();
@@ -56,6 +60,7 @@ export default function Queue({ accounts }: { accounts: Row[] }) {
     return accounts.filter((a) => {
       if (a.score < minScore) return false;
       if (country !== "all" && a.country !== country) return false;
+      if (decision !== "all" && a.decision !== decision) return false;
       if (needle && !a.domain.includes(needle) && !(a.org_observed || "").toLowerCase().includes(needle)) {
         return false;
       }
@@ -64,7 +69,26 @@ export default function Queue({ accounts }: { accounts: Row[] }) {
       }
       return true;
     });
-  }, [accounts, q, country, minScore, signals]);
+  }, [accounts, q, country, decision, minScore, signals]);
+
+  const totalPages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+
+  useEffect(() => {
+    setPage(1);
+  }, [q, country, decision, minScore, signals]);
+
+  useEffect(() => {
+    if (page > totalPages) setPage(totalPages);
+  }, [page, totalPages]);
+
+  const pageRows = useMemo(() => {
+    const start = (safePage - 1) * PAGE_SIZE;
+    return rows.slice(start, start + PAGE_SIZE);
+  }, [rows, safePage]);
+
+  const rangeStart = rows.length === 0 ? 0 : (safePage - 1) * PAGE_SIZE + 1;
+  const rangeEnd = Math.min(safePage * PAGE_SIZE, rows.length);
 
   function toggle(id: string) {
     setSignals((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
@@ -90,6 +114,12 @@ export default function Queue({ accounts }: { accounts: Row[] }) {
           <option value={28}>Score ≥ 28 (watch)</option>
           <option value={55}>Score ≥ 55 (call now)</option>
         </select>
+        <select value={decision} onChange={(e) => setDecision(e.target.value as typeof decision)}>
+          <option value="all">All decisions</option>
+          <option value="call_now">Call now</option>
+          <option value="watch">Watch</option>
+          <option value="low">Low</option>
+        </select>
         <div className="chips">
           {SIGNAL_FILTERS.map((f) => (
             <button
@@ -104,7 +134,9 @@ export default function Queue({ accounts }: { accounts: Row[] }) {
         </div>
       </div>
       <p className="lede" style={{ marginTop: 0 }}>
-        Showing {rows.length.toLocaleString()} of {accounts.length.toLocaleString()} accounts
+        {rows.length === 0
+          ? `No accounts match — ${accounts.length.toLocaleString()} total in queue`
+          : `Showing ${rangeStart.toLocaleString()}–${rangeEnd.toLocaleString()} of ${rows.length.toLocaleString()} matches (${accounts.length.toLocaleString()} total)`}
       </p>
       <table>
         <thead>
@@ -117,7 +149,7 @@ export default function Queue({ accounts }: { accounts: Row[] }) {
           </tr>
         </thead>
         <tbody>
-          {rows.slice(0, 400).map((a) => (
+          {pageRows.map((a) => (
             <tr key={a.domain}>
               <td className={`score ${scoreClass(a.score)}`}>{a.score}</td>
               <td>
@@ -143,8 +175,28 @@ export default function Queue({ accounts }: { accounts: Row[] }) {
           ))}
         </tbody>
       </table>
-      {rows.length > 400 && (
-        <p className="lede">First 400 of {rows.length.toLocaleString()} shown — tighten filters to focus the day list.</p>
+      {rows.length > PAGE_SIZE && (
+        <nav className="pagination" aria-label="Account list pages">
+          <button
+            type="button"
+            className="page-btn"
+            disabled={safePage <= 1}
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+          >
+            Previous
+          </button>
+          <span className="page-meta">
+            Page {safePage} of {totalPages}
+          </span>
+          <button
+            type="button"
+            className="page-btn"
+            disabled={safePage >= totalPages}
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+          >
+            Next
+          </button>
+        </nav>
       )}
     </div>
   );

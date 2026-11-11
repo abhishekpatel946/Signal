@@ -1,30 +1,75 @@
-# Raw scan dump (9–17 GB) — never commit
+# =============================================================================
+# Firmable take-home — only source, eval artifacts, and app queue data ship.
+# Everything else is local or regenerated (see README + ARCHITECTURE.md).
+# =============================================================================
+
+# --- Raw scan downloads (multi-GB; never push) ---
 b2_download_file_by_id
+b2_download_file_by_id.*
 Unconfirmed*.crdownload
 _sample_head.bin
 *.zst
 *.zstd
 
-# Pipeline artifacts (regenerate locally)
-data/raw/
+# --- Pipeline outputs (regenerate with ingest.run / ingest.score) ---
 data/parquet/
+data/parquet_qa/
 data/parquet_test/
+data/raw/
 data/tmp/
+**/*.parquet
+**/_ingest_stats.json
+# Small summary kept in repo:
+!data/score_stats.json
+
+# --- Python env & caches ---
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+.Python
 .venv/
 venv/
+env/
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Secrets & env ---
+.env
+.env.*
+!.env.example
+
+# --- One-off local debug (not part of the deliverable) ---
 eval/peek.py
 eval/list_gold.py
-.env
-.DS_Store
 
-# Next.js
+# --- Next.js / Node (app/ has its own .gitignore too) ---
 app/node_modules/
 app/.next/
 app/out/
 app/.vercel/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# IDE
+# --- OS & IDE ---
+.DS_Store
+Thumbs.db
+Desktop.ini
 .idea/
 .vscode/
+*.swp
+*~
+
+# --- Logs ---
+*.log
+
+# --- Cursor / chat assets (not application code) ---
+assets/
+.cursor/
