@@ -13,6 +13,9 @@ type Row = {
   org_observed: string | null;
   n_hosts: number;
   cvss_max: number;
+  fit: string;
+  icp: string;
+  breakdown: Record<string, number>;
   signals: {
     cve: boolean;
     exposure: boolean;
@@ -35,15 +38,62 @@ const SIGNAL_FILTERS = [
   { id: "reachable", label: "Has contact" },
 ] as const;
 
+const ICP_FILTERS = ["all", "edu", "gov", "health", "enterprise", "smb"] as const;
+
 function scoreClass(score: number) {
   if (score >= 55) return "hot";
   if (score >= 28) return "mid";
   return "ok";
 }
 
+function topBreakdown(b: Record<string, number>) {
+  const entries = Object.entries(b);
+  if (!entries.length) return "";
+  entries.sort((a, b) => b[1] - a[1]);
+  const [k, v] = entries[0];
+  return `${k.replace(/_/g, " ")} +${v}`;
+}
+
+function exportCsv(rows: Row[]) {
+  const header = [
+    "domain",
+    "score",
+    "decision",
+    "icp",
+    "country",
+    "cvss_max",
+    "contact",
+    "why",
+  ];
+  const esc = (s: string) => `"${s.replace(/"/g, '""')}"`;
+  const lines = [
+    header.join(","),
+    ...rows.map((a) =>
+      [
+        esc(a.domain),
+        a.score,
+        a.decision,
+        a.icp,
+        esc(a.country || ""),
+        a.cvss_max,
+        esc(a.security_contacts[0] || ""),
+        esc(a.why),
+      ].join(",")
+    ),
+  ];
+  const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `signal-queue-${rows.length}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 export default function Queue({ accounts }: { accounts: Row[] }) {
   const [q, setQ] = useState("");
   const [country, setCountry] = useState("all");
+  const [icp, setIcp] = useState<(typeof ICP_FILTERS)[number]>("all");
   const [decision, setDecision] = useState<"all" | Row["decision"]>("all");
   const [minScore, setMinScore] = useState(12);
   const [signals, setSignals] = useState<string[]>([]);
@@ -60,6 +110,7 @@ export default function Queue({ accounts }: { accounts: Row[] }) {
     return accounts.filter((a) => {
       if (a.score < minScore) return false;
       if (country !== "all" && a.country !== country) return false;
+      if (icp !== "all" && a.icp !== icp) return false;
       if (decision !== "all" && a.decision !== decision) return false;
       if (needle && !a.domain.includes(needle) && !(a.org_observed || "").toLowerCase().includes(needle)) {
         return false;
@@ -69,14 +120,14 @@ export default function Queue({ accounts }: { accounts: Row[] }) {
       }
       return true;
     });
-  }, [accounts, q, country, decision, minScore, signals]);
+  }, [accounts, q, country, icp, decision, minScore, signals]);
 
   const totalPages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
   const safePage = Math.min(page, totalPages);
 
   useEffect(() => {
     setPage(1);
-  }, [q, country, decision, minScore, signals]);
+  }, [q, country, icp, decision, minScore, signals]);
 
   useEffect(() => {
     if (page > totalPages) setPage(totalPages);
@@ -109,6 +160,13 @@ export default function Queue({ accounts }: { accounts: Row[] }) {
             </option>
           ))}
         </select>
+        <select value={icp} onChange={(e) => setIcp(e.target.value as (typeof ICP_FILTERS)[number])}>
+          {ICP_FILTERS.map((c) => (
+            <option key={c} value={c}>
+              {c === "all" ? "All ICP" : c.toUpperCase()}
+            </option>
+          ))}
+        </select>
         <select value={minScore} onChange={(e) => setMinScore(Number(e.target.value))}>
           <option value={12}>Score ≥ 12</option>
           <option value={28}>Score ≥ 28 (watch)</option>
@@ -120,6 +178,9 @@ export default function Queue({ accounts }: { accounts: Row[] }) {
           <option value="watch">Watch</option>
           <option value="low">Low</option>
         </select>
+        <button type="button" className="page-btn" onClick={() => exportCsv(rows)}>
+          Export CSV ({rows.length})
+        </button>
         <div className="chips">
           {SIGNAL_FILTERS.map((f) => (
             <button
@@ -151,11 +212,17 @@ export default function Queue({ accounts }: { accounts: Row[] }) {
         <tbody>
           {pageRows.map((a) => (
             <tr key={a.domain}>
-              <td className={`score ${scoreClass(a.score)}`}>{a.score}</td>
+              <td className={`score ${scoreClass(a.score)}`}>
+                {a.score}
+                <div className="why mono">{topBreakdown(a.breakdown)}</div>
+              </td>
               <td>
                 <a className="domain" href={`/accounts/${encodeURIComponent(a.domain)}`}>
                   {a.domain}
                 </a>
+                <div className="why">
+                  <span className="pill">{a.icp}</span> {a.fit !== "named_business" && <span className="pill">fit: {a.fit}</span>}
+                </div>
                 <div className="why">{a.why}</div>
               </td>
               <td>

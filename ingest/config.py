@@ -241,6 +241,101 @@ JUNK_REGISTRABLE = {
     "nextgentel.com",
     "chello.nl",
     "pignet.net.br",
+    "tilaa.cloud",
+    "ukservers.com",
+    "hersheytel.net",
+    "evopc.pl",
+    "keyubu.com",
+    "ikexpress.com",
+    "cin.net",
+    "kylos.net",
+    "viviotech.com",
+    "provalue.net",
+}
+
+# Substrings in a registrable domain that usually mean hoster/reseller, not buyer.
+PROVIDER_DOMAIN_SUBSTRINGS = (
+    "ukservers",
+    "hersheytel",
+    "evopc",
+    "tilaa",
+    "keyubu",
+    "ikexpress",
+    "ukfast",
+    "dedip",
+    "dedicated",
+    "hostings",
+    "hoster",
+    "colocation",
+    "datacenter",
+    "datacentre",
+    "vps",
+    "myvps",
+    "cloudsrv",
+    "supersrv",
+    "quicksrv",
+    "privatelayer",
+    "servercentral",
+    "sim-networks",
+    "kinghost",
+    "telecom",
+    "telephone",
+    "cooperative",
+    "cableonda",
+    "brasiltelecom",
+    "highspeedlink",
+)
+
+# Org/banner strings that mean “this is infra”, even if the domain looks branded.
+RESELLER_ORG_PHRASES = (
+    "private customer",
+    "business customers",
+    "/30 business",
+    "serveur dedie",
+    "dedicated server",
+    "kabelplus",
+    "kylos",
+    "viviotech",
+    "provalue",
+    "evopc",
+    "computerese",
+    "ikoula",
+    "tilaa",
+    "wud001",
+    "limited liability company \"de novo\"",
+    "unified layer",
+    "rackspace",
+    "gmo internet",
+    "ahcloud",
+    "clouding",
+    "u1host",
+    "uvt internet",
+    "cloud services",
+    "free sas",
+)
+
+# Registrable domains that are always hosters (exact match).
+HOSTING_REGISTRABLE = {
+    "hostmonster.com",
+    "cloud-ips.com",
+    "gmoserver.jp",
+    "u1host.com",
+    "clouding.host",
+    "viviotech.net",
+    "bluehost.com",
+    "siteground.com",
+    "dreamhost.com",
+    "inmotionhosting.com",
+    "forpsi.net",
+    "uvtnet.cz",
+}
+
+# Major consumer/business ISPs — not cyber software buyers.
+TELCO_REGISTRABLE = {
+    "rcn.com",
+    "free.fr",
+    "sfr.fr",
+    "virginmedia.com",
 }
 
 PROVIDER_DOMAIN_TOKENS = (
@@ -372,6 +467,17 @@ ISP_ORG_SUBSTRINGS = (
     "china telecom",
     "china unicom",
     "china mobile",
+    "chinanet",
+    "railtel",
+    "telefonica",
+    "magyar telekom",
+    "orange polska",
+    "telmex",
+    "orion telekom",
+    "unified layer",
+    "rackspace",
+    "gmo internet",
+    "comcast cable",
     "nntt",
     "ntt ",
     "pccw",
@@ -560,6 +666,7 @@ WEIGHTS = {
     "no_waf_on_http": 5,
     "missing_securitytxt": 2,
     "has_securitytxt_contact": 3,
+    "fresh_exposure": 4,  # banner seen in last 14d vs batch max — “reach them first”
 }
 
 MAX_EVIDENCE_PER_ACCOUNT = 8

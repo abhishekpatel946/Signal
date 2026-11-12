@@ -8,11 +8,15 @@ from functools import lru_cache
 import tldextract
 
 from ingest.config import (
+    HOSTING_REGISTRABLE,
+    TELCO_REGISTRABLE,
     ISP_DOMAIN_SUFFIXES,
     ISP_ORG_SUBSTRINGS,
     JUNK_DOMAIN_SUFFIXES,
     JUNK_REGISTRABLE,
+    PROVIDER_DOMAIN_SUBSTRINGS,
     PROVIDER_DOMAIN_TOKENS,
+    RESELLER_ORG_PHRASES,
 )
 
 _extract = tldextract.TLDExtract(suffix_list_urls=())
@@ -91,6 +95,67 @@ def registrable(host: str | None) -> str | None:
     return reg
 
 
+def is_reseller_org(org: str | None) -> bool:
+    if not org:
+        return False
+    low = org.lower()
+    return any(p in low for p in RESELLER_ORG_PHRASES)
+
+
+def is_provider_domain(domain: str) -> bool:
+    """Hosting / telco reseller registrable domains — never a cyber software ICP."""
+    d = domain.lower().strip()
+    if d in JUNK_REGISTRABLE or d in HOSTING_REGISTRABLE or d in TELCO_REGISTRABLE:
+        return True
+    if any(s in d for s in PROVIDER_DOMAIN_SUBSTRINGS):
+        return True
+    if d.endswith(".host") or d.endswith(".servers"):
+        return True
+    head = d.split(".")[0]
+    if head in {"servers", "hosting", "vps", "dedi", "dedibox", "colo", "datacenter", "datacentre"}:
+        return True
+    if d.endswith(".cloud") and head not in {
+        "azure",
+        "google",
+        "aws",
+        "salesforce",
+        "adobe",
+        "oracle",
+    }:
+        # Most *.cloud domains in scan data are VPS brands, not buyers.
+        if len(head) <= 12 and not re.search(r"[0-9]{3,}", head):
+            return True
+    if is_isp_domain(d):
+        return True
+    return False
+
+
+def infer_icp_tag(domain: str, n_hosts: int) -> str:
+    d = domain.lower()
+    if any(
+        d.endswith(s) for s in (".edu", ".ac.uk", ".ac.jp", ".ac.th", ".edu.tw", ".edu.mx", ".edu.au", ".edu.co")
+    ):
+        return "edu"
+    if any(
+        x in d
+        for x in (
+            ".gov",
+            ".gob.",
+            ".govt.",
+            ".mil",
+            ".go.jp",
+            ".go.kr",
+            "gov.br",
+        )
+    ):
+        return "gov"
+    if any(x in d for x in (".health", "hospital", "clinic", "medical", "sante")):
+        return "health"
+    if n_hosts >= 25:
+        return "enterprise"
+    return "smb"
+
+
 def is_isp_domain(domain: str) -> bool:
     d = domain.lower()
     if d in JUNK_REGISTRABLE:
@@ -124,7 +189,7 @@ def pick_company_domain(hostnames: list[str], domains: list[str]) -> str | None:
         if looks_like_infra_hostname(raw):
             continue
         reg = registrable(raw)
-        if not reg or reg in seen:
+        if not reg or reg in seen or is_provider_domain(reg):
             continue
         seen.add(reg)
         score = 0

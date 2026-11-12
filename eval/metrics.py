@@ -6,7 +6,8 @@ import json
 import random
 from pathlib import Path
 
-from ingest.resolve import is_isp_domain, is_isp_org, is_junk_suffix
+from ingest.config import PROVIDER_DOMAIN_SUBSTRINGS
+from ingest.resolve import is_isp_domain, is_isp_org, is_junk_suffix, is_provider_domain, is_reseller_org
 
 # High-confidence noise: these should not appear in a sales queue.
 NOISE_SUBSTRINGS = (
@@ -52,29 +53,19 @@ BUYER_SUFFIXES = (
     ".govt.",
     ".ac.uk",
     ".ac.jp",
+    ".ac.th",
     ".mil",
 )
 
-PROVIDER_BRANDS = (
-    "telecom",
-    "cableonda",
-    "brasiltelecom",
-    "highspeedlink",
-    "ukservers",
-    "tilaa",
-    "viviotech",
-    "kylos",
-    "hersheytel",
-    "provalue",
-    "evopc",
-    "bnet.at",
-)
+PROVIDER_BRANDS = PROVIDER_DOMAIN_SUBSTRINGS
 
 
 def auto_label(account: dict) -> str:
     """SDR question: would I call this named company this week?"""
     domain = account["domain"]
-    if is_noise_domain(domain) or is_isp_domain(domain):
+    if is_provider_domain(domain) or is_noise_domain(domain) or is_isp_domain(domain):
+        return "skip"
+    if is_reseller_org(account.get("org_observed")):
         return "skip"
     if any(x in domain for x in PROVIDER_BRANDS):
         return "skip"
@@ -116,6 +107,17 @@ def noise_leak_rate(accounts: list[dict], k: int = 100) -> float:
     return sum(1 for a in top if is_noise_domain(a["domain"])) / len(top)
 
 
+def provider_leak_rate(accounts: list[dict], k: int = 100) -> float:
+    top = accounts[:k]
+    if not top:
+        return 0.0
+    return sum(
+        1
+        for a in top
+        if is_provider_domain(a["domain"]) or is_reseller_org(a.get("org_observed"))
+    ) / len(top)
+
+
 def high_sev_rate(accounts: list[dict], k: int) -> float:
     top = accounts[:k]
     if not top:
@@ -144,6 +146,7 @@ def main() -> None:
         "precision_at_50": round(precision_at_k(accounts, 50), 3),
         "precision_at_100": round(precision_at_k(accounts, 100), 3),
         "noise_leak_top100": round(noise_leak_rate(accounts, 100), 3),
+        "provider_leak_top100": round(provider_leak_rate(accounts, 100), 3),
         "high_sev_top100": round(high_sev_rate(accounts, 100), 3),
         "high_sev_random100": round(high_sev_rate(random_sample, 100), 3),
         "call_rate_top50": round(precision_at_k(accounts, 50), 3),
@@ -166,6 +169,8 @@ def main() -> None:
 
     out = root / "eval" / "metrics.json"
     out.write_text(json.dumps(metrics, indent=2))
+    app_metrics = root / "app" / "data" / "metrics.json"
+    app_metrics.write_text(json.dumps(metrics, indent=2))
     print(json.dumps(metrics, indent=2))
 
 

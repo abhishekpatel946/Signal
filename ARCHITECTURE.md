@@ -56,7 +56,7 @@ Resolution steps:
 3. Reject junk suffixes (CDN, hyperscaler shared infra, telco reverse-DNS patterns).
 4. Roll all surviving hosts into one **account** keyed by that domain.
 
-Accounts that are honeypot-only, CDN-only, ISP reverse-DNS umbrellas, or provider aggregates get **fit = 0** and never export.
+Accounts that are honeypot-only, CDN-only, ISP reverse-DNS umbrellas, **hosting-provider domains** (`is_provider_domain`), **reseller org strings**, or provider aggregates get **fit = 0** and never export.
 
 ## Scoring model
 

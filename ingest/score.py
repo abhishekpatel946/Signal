@@ -16,7 +16,15 @@ from ingest.config import (
     MIN_SCORE_EXPORT,
     WEIGHTS,
 )
-from ingest.resolve import is_isp_domain, is_isp_org, looks_like_infra_hostname, pick_company_domain
+from ingest.resolve import (
+    infer_icp_tag,
+    is_isp_domain,
+    is_isp_org,
+    is_provider_domain,
+    is_reseller_org,
+    looks_like_infra_hostname,
+    pick_company_domain,
+)
 
 
 def _empty_acc(domain: str) -> dict[str, Any]:
@@ -48,6 +56,7 @@ def _empty_acc(domain: str) -> dict[str, Any]:
         "evidence": [],
         "cities": Counter(),
         "n_ptr_like": 0,
+        "ts_max": None,
     }
 
 
@@ -145,6 +154,10 @@ def consume_host(acc: dict, host: dict) -> None:
         acc["n_waf_protected"] += 1
     if host.get("security_contact"):
         acc["security_contacts"].add(host["security_contact"])
+    ts = host.get("timestamp")
+    if isinstance(ts, (int, float)) and ts > 1_000_000_000:
+        prev = acc["ts_max"]
+        acc["ts_max"] = max(prev or 0, int(ts))
 
     vulns = host.get("vulns") or []
     if vulns:
@@ -173,6 +186,30 @@ def consume_host(acc: dict, host: dict) -> None:
 def fit_multiplier(acc: dict, domain: str) -> tuple[float, str]:
     """0 = drop from queue. CDN-only / honeypot-only assets are not ICP."""
     n_ips = min(len(acc["ips"]), 80)
+    top_org = acc["orgs"].most_common(1)[0][0] if acc["orgs"] else None
+    if is_provider_domain(domain):
+        return 0.0, "hosting_provider"
+    if is_reseller_org(top_org):
+        return 0.0, "reseller_org"
+    if top_org and any(
+        x in (top_org or "").lower()
+        for x in (
+            "chinanet",
+            "china telecom",
+            "china unicom",
+            "china mobile",
+            "railtel",
+            "telefonica",
+            "magyar telekom",
+            "orange polska",
+            "telmex",
+            "comcast cable",
+            "unified layer",
+            "rackspace",
+            "gmo internet",
+        )
+    ):
+        return 0.0, "telco_footprint"
     if acc["n_honeypot"] and acc["n_honeypot"] >= acc["n_hosts"] * 0.8:
         return 0.0, "honeypot"
     if acc["n_cdn"] and acc["n_cdn"] >= acc["n_hosts"] * 0.9 and acc["n_dangerous"] == 0 and acc["n_vuln_hosts"] == 0:
@@ -186,7 +223,6 @@ def fit_multiplier(acc: dict, domain: str) -> tuple[float, str]:
         return 0.0, "provider_aggregate"
     if domain in {"google.com", "cloudflare.com", "amazon.com", "microsoft.com"}:
         return 0.0, "hyperscaler"
-    top_org = acc["orgs"].most_common(1)[0][0] if acc["orgs"] else None
     ispish = is_isp_org(top_org)
     if ispish and acc["n_hosts"] == 1 and not acc["n_vuln_hosts"] and not acc["n_dangerous"] and not acc["n_eol"]:
         return 0.15, "single_hosted_no_risk"
@@ -195,7 +231,7 @@ def fit_multiplier(acc: dict, domain: str) -> tuple[float, str]:
     return 1.0, "named_business"
 
 
-def compute_score(acc: dict, domain: str) -> dict:
+def compute_score(acc: dict, domain: str, batch_ts_max: int | None = None) -> dict:
     fit, fit_reason = fit_multiplier(acc, domain)
     if fit <= 0:
         return {"score": 0, "fit": fit_reason, "urgency": 0, "breakdown": {}, "reasons": []}
@@ -253,6 +289,10 @@ def compute_score(acc: dict, domain: str) -> dict:
     if acc["security_contacts"]:
         breakdown["has_securitytxt_contact"] = WEIGHTS["has_securitytxt_contact"]
         reasons.append("security.txt lists a contact — reachable this week")
+    ref = batch_ts_max or acc.get("ts_max")
+    if ref and acc.get("ts_max") and (ref - acc["ts_max"]) <= 14 * 86400:
+        breakdown["fresh_exposure"] = WEIGHTS["fresh_exposure"]
+        reasons.append("Fresh internet exposure in the last ~2 weeks — reach them first")
 
     urgency = sum(breakdown.values())
     # Light penalty when the whole footprint is CDN/WAF already
@@ -280,7 +320,14 @@ def serialize(acc: dict, scored: dict) -> dict:
     cves = sorted(acc["cves"].values(), key=lambda c: c["cvss"], reverse=True)[:8]
     contacts = sorted(acc["security_contacts"])[:4]
     products = [p for p, _ in acc["products"].most_common(6)]
-    decision = "call_now" if scored["score"] >= 55 else "watch" if scored["score"] >= 28 else "low"
+    buyer_fit = scored["fit"] in {"named_business", "hosted_named_domain"}
+    decision = (
+        "call_now"
+        if buyer_fit and scored["score"] >= 55
+        else "watch"
+        if buyer_fit and scored["score"] >= 28
+        else "low"
+    )
     why = "; ".join(scored["reasons"]) if scored["reasons"] else "Limited public risk evidence."
     return {
         "domain": acc["domain"],
@@ -314,6 +361,7 @@ def serialize(acc: dict, scored: dict) -> dict:
         "dangerous": [k for k, _ in acc["dangerous_kinds"].most_common(5)],
         "security_contacts": contacts,
         "evidence": acc["evidence"],
+        "icp": infer_icp_tag(acc["domain"], acc["n_hosts"]),
     }
 
 
@@ -344,10 +392,12 @@ def score_parquet(parquet_dir: Path) -> tuple[list[dict], dict]:
             consume_host(accounts[domain], host)
         print(f"scored through {path.name} ({n_hosts:,} hosts, {len(accounts):,} domains)", flush=True)
 
+    batch_ts_max = max((a.get("ts_max") or 0 for a in accounts.values()), default=0) or None
+
     exported: list[dict] = []
     dropped_fit = 0
     for domain, acc in accounts.items():
-        scored = compute_score(acc, domain)
+        scored = compute_score(acc, domain, batch_ts_max)
         if scored["score"] < MIN_SCORE_EXPORT:
             dropped_fit += 1
             continue

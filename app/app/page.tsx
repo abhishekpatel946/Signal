@@ -11,6 +11,9 @@ export default function HomePage() {
     org_observed: a.org_observed,
     n_hosts: a.n_hosts,
     cvss_max: a.cvss_max,
+    fit: a.fit,
+    icp: a.icp || "smb",
+    breakdown: a.breakdown,
     signals: a.signals,
     security_contacts: a.security_contacts,
   }));

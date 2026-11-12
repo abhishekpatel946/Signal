@@ -25,3 +25,12 @@ export function listMeta() {
   const payload = loadPayload();
   return payload.stats;
 }
+
+export function loadMetrics(): Record<string, number> | null {
+  try {
+    const path = join(process.cwd(), "data", "metrics.json");
+    return JSON.parse(readFileSync(path, "utf8")) as Record<string, number>;
+  } catch {
+    return null;
+  }
+}

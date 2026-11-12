@@ -11,9 +11,9 @@ Deeper design: **[ARCHITECTURE.md](./ARCHITECTURE.md)** (data flow, modules, sco
 ## How a rep uses it
 
 1. Open the queue. Accounts are already ranked.
-2. Filter by country, CVE / exposure / EOL / no WAF, or search a domain.
+2. Filter by country, **ICP** (edu / gov / enterprise / SMB), CVE / exposure / EOL / no WAF, or search a domain.
 3. Open an account: evidence (IP, port, product, CVE), score breakdown, `security.txt` contact if the scan saw one.
-4. Call the ones marked **call now**. Do not pitch CDNs, honeypots, or ISP reverse-DNS umbrellas — those never enter the queue.
+4. **Export CSV** for the filtered list. Call the ones marked **call now** (buyer `fit` only — hosters never export).
 
 ## Approach
 
@@ -40,12 +40,13 @@ zstd JSONL scan
 | Self-signed TLS | Weak hygiene |
 | HTTP risk and no WAF | Greenfield vs Cloudflare/Fortinet already present (displacement, down-weighted) |
 | `security.txt` | Reachability, not risk |
+| Fresh banner timestamp | “Reach them first” within ~2 weeks of batch peak |
 
-Score = capped urgency points × fit multiplier (0–100), with a stored reason list. `call_now` ≥ 55, `watch` ≥ 28.
+Score = capped urgency points × fit multiplier (0–100), with a stored reason list. **Hoster/reseller domains and orgs are fit = 0** (never exported). `call_now` ≥ 55 on buyer fit, `watch` ≥ 28.
 
 ## This batch (numbers)
 
-From **800,000** scan records (~12 min to ingest at ~1,100 records/s). **Full-file ingest** uses the same commands without `--max-records`; only runtime and Parquet size change.
+From **800,000** scan records (~12 min to ingest at ~1,100 records/s). **Full-file ingest** uses the same commands without `--max-records`; at the same throughput, the full ~16.9 GB stream is on the order of **4–5 hours** on a typical laptop (I/O bound; RAM stays flat via streaming). Each additional monthly file is `python -m ingest.pipeline --batch-id YYYY-MM`.
 
 | Step | Count |
 | --- | --- |
@@ -53,8 +54,8 @@ From **800,000** scan records (~12 min to ingest at ~1,100 records/s). **Full-fi
 | Honeypots dropped | 13,424 |
 | No usable company domain | 663,503 |
 | Named domains aggregated | 41,053 |
-| Exported to the sales queue (score ≥ 12) | 7,777 |
-| Mean score, top 100 | 52.8 |
+| Exported to the sales queue (score ≥ 12) | 7,427 |
+| Mean score, top 100 | 49.5 |
 | Top 100 with at least one CVE | 99% |
 
 `python -m ingest.score` is deterministic on a given Parquet batch.
@@ -70,23 +71,19 @@ python -m eval.metrics
 
 Last run (`eval/metrics.json`):
 
-- **Call rate @50 / @100:** 0.78 / 0.83 — production `auto_label` (named buyer with material risk, not a telco/hoster).
-- **Call rate on all 7,777 exported accounts:** 0.084 — the ranker concentrates “call” accounts ~9× vs the exported set.
+- **Call rate @50 / @100:** 1.00 / 0.96 — production `auto_label` (named buyer with material risk, not a telco/hoster).
+- **Call rate on all ~7.4k exported accounts:** ~0.081 — the ranker concentrates “call” accounts ~9× vs the exported set.
 - **Noise leak in top 100:** 0 (no leftover CDN/cloud PTR suffixes).
+- **Provider/hoster leak in top 100:** 0 — `is_provider_domain`, reseller-org, and telco footprint gates.
 - **High-severity finding:** 100% of the exported set, including a random 100. That is by design: we drop low-score rows before export. Ranking quality is *who to call*, not *whether a CVE exists*.
-- **Gold sample:** 100 stratified rows (top / mid / tail) in `eval/gold.json`, hand-labeled via `eval/hand_label.py`. Agreement with `auto_label`: **0.82**. Only **14** hand-`call` domains appear in the global top 100 because the gold set deliberately samples mid/tail ranks — not because the ranker misses obvious calls.
+- **Gold sample:** 100 stratified rows (top / mid / tail) in `eval/gold.json`, hand-labeled via `eval/hand_label.py`. Agreement with `auto_label`: **~0.94** (re-run after queue tightening). Few hand-`call` gold rows appear in the global top 100 because the gold set deliberately samples mid/tail ranks — not because the ranker misses obvious calls.
 - **Stability:** re-run `python -m ingest.score` on the same Parquet → same domain, score, and evidence class.
 
 We did **not** use an LLM in scoring (deterministic rules, no token cost). Evaluation is rule-based + hand-reviewed gold.
 
 ## How we built it (AI-assisted workflow)
 
-Firmable cares about *how* you work, not only the artifact:
-
-- **Data exploration:** streaming peek scripts and banner schema inspection (then removed from git as local tooling).
-- **Iteration on entity resolution:** denylists and PTR heuristics in `ingest/resolve.py` refined against false positives (telco umbrellas, CDN-only domains).
-- **Weights and export thresholds:** tuned against `eval/metrics.py` and the gold sample, not gut feel alone.
-- **IDE agents (Cursor):** used for boilerplate, refactors, and doc alignment — not for runtime scoring or labels.
+See **[docs/AI_WORKFLOW.md](./docs/AI_WORKFLOW.md)** — data peeks, what agents helped with, what we refused to automate, and an LLM summarisation path we rejected with reasoning.
 
 Product logic stays auditable Python; agents accelerated the dev loop.
 
@@ -128,8 +125,9 @@ Set Vercel **Root Directory** to `app` when importing from GitHub.
 | In git | Ignored (regenerate locally) |
 | --- | --- |
 | `ingest/`, `eval/`, `requirements.txt` | Raw scan file, `*.zst`, `*.parquet` |
-| `app/` source + `app/data/accounts.json` | `app/node_modules/`, `.next/`, `out/`, `.vercel/` |
+| `app/` source + `app/data/accounts.json`, `app/data/metrics.json` | `app/node_modules/`, `.next/`, `out/`, `.vercel/` |
 | `data/score_stats.json`, `eval/gold.json`, `eval/metrics.json` | `data/parquet/`, `.venv/`, `assets/`, secrets |
+| `docs/AI_WORKFLOW.md`, `SUBMISSION_EMAIL.md` | Local scan file |
 
 Do not commit the multi-GB scan. `app/data/accounts.json` is the precomputed payload the hosted app needs (~9 MB).
 
@@ -147,4 +145,5 @@ Do not commit the multi-GB scan. `app/data/accounts.json` is the precomputed pay
 - `app/` — Next.js App Router (queue, account, method)
 - `eval/` — gold sample + metrics
 - `ARCHITECTURE.md` — system design and commit policy
-- `SUBMISSION.md` — deploy/push checklist (optional)
+- `docs/AI_WORKFLOW.md` — AI-native dev loop
+- `SUBMISSION_EMAIL.md` — email template for Firmable

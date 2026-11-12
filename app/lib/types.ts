@@ -42,6 +42,7 @@ export type Account = {
   dangerous: string[];
   security_contacts: string[];
   evidence: Evidence[];
+  icp?: string;
 };
 
 export type Payload = {

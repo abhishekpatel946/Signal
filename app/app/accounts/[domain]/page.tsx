@@ -81,6 +81,7 @@ export default function AccountPage({ params }: { params: { domain: string } }) 
           </div>
           <div className="card">
             <h2>Footprint</h2>
+            <div className="ev">ICP segment: {a.icp || "smb"}</div>
             <div className="ev">Observed org (usually hoster): {a.org_observed || "—"}</div>
             <div className="ev">Products: {a.products.join(", ") || "—"}</div>
             <div className="ev">Dangerous services: {a.dangerous.join(", ") || "none"}</div>

@@ -1,11 +1,11 @@
 {
   "hosts_read": 800000,
-  "hosts_named_domain": 123073,
-  "skipped_no_domain": 663503,
+  "hosts_named_domain": 116741,
+  "skipped_no_domain": 669835,
   "skipped_honeypot": 13424,
-  "companies_aggregated": 41053,
-  "dropped_low_score": 33276,
-  "exported": 7777,
-  "mean_top100": 52.8,
+  "companies_aggregated": 40774,
+  "dropped_low_score": 33347,
+  "exported": 7427,
+  "mean_top100": 49.5,
   "pct_top100_cve": 99.0
 }
